@@ -1,6 +1,7 @@
 # Trabalho final da materia de Desenvolvimento Mobile - BackEnd em node
 
 ### Como instalar: 
+- Import o arquivo Event.sql para o banco de dados local (XAMPP);
 - Tenha o node instalado en sua maquina;
 - Clone o projeto em sua maquina;
 - Abra o local do projeto no terminal;
@@ -13,3 +14,4 @@
 ### Observaçoes: 
 - os headers das requisiçoes estão no arquivo: `./src/app.js`;
 - Atualmente so aceita requisiçoes do endereço padrão do Angular: `http://localhost:4200`;
+- O arquivo de conexão com o banco esta em: `./src/models/connection.js`;

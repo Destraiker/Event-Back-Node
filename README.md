@@ -7,7 +7,7 @@
 - Execute o comando `npm instal` para instalar as bibliotecas nescessarias;
 - Para executar o projeto tem 2 maneiras:
     - Executar o arquivo `./bin/server.js` com o nodemon ou node. EX: `nodemon ./bin/server.js`;
-    - Executar o comando de atalho ja configurado no arquivo JSON. EX: `npm start`;
+    - Executar o comando de atalho ja configurado no arquivo `package.json`. EX: `npm start`;
 - o projeto ja estara rodando na porta 3000 ou em outra porta disponivel, sera informado no console;
 
 ### Observaçoes: 

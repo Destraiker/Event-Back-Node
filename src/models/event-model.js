@@ -49,13 +49,14 @@ module.exports = class Endereco extends connection {
         
         return await con.executarQuery(sql, values,conexao);
     }
-    async findAll() {
+    async findAll(start,quant, idUsuario) {
         const con=new connection();
         const conexao=con.conexao();
 
-        var sql = "SELECT * FROM evento WHERE  Vagas>0 AND DataInicio>CURDATE()";
-        
-        return await con.executarQuery(sql, null, conexao);
+        var sql = "SELECT * FROM evento WHERE  Vagas>0 AND DataInicio>CURDATE() AND Usuario_idUsuario!=? LIMIT ?,?";
+        var values = [idUsuario,start,quant];
+
+        return await con.executarQuery(sql, values, conexao);
     }
     async findMyEvents(idUsuario) {
         const con=new connection();
@@ -97,7 +98,7 @@ module.exports = class Endereco extends connection {
         const con=new connection();
         const conexao=con.conexao();
 
-        var sql = "SELECT * FROM usuario_has_evento INNER JOIN evento ON usuario_has_evento.Evento_idEvento = evento.idEvento WHERE usuario_has_evento.Evento_idEvento=?";
+        var sql = "SELECT * FROM usuario_has_evento INNER JOIN usuario ON usuario_has_evento.Usuario_idUsuario = usuario.idUsuario WHERE usuario_has_evento.Evento_idEvento=?";
         var values = [idEvento];
 
         return await con.executarQuery(sql, values, conexao);
@@ -117,16 +118,6 @@ module.exports = class Endereco extends connection {
 
         var sql = "DELETE FROM `usuario_has_evento` WHERE Usuario_idUsuario=? AND Evento_idEvento=?";
         var values = [req.idUsuario,req.idEvento];
-
-        return await con.executarQuery(sql, values, conexao);
-    }
-
-    async findMyEvents(idEvento) {
-        const con=new connection();
-        const conexao=con.conexao();
-
-        var sql = "SELECT * FROM usuario_has_evento WHERE Evento_idEvento=?";
-        var values = [idEvento];
 
         return await con.executarQuery(sql, values, conexao);
     }

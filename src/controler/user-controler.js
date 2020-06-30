@@ -34,7 +34,7 @@ exports.post = (req, res, next) => {
     }));
 };
 exports.get = (req, res, next) => {
-    model.findAll(req.body).then(function (x) {
+    model.findAll().then(function (x) {
         res.status(201).send({
             message: 'Usuario encontrado com suscesso',
             data: x
@@ -61,6 +61,16 @@ exports.getById = (req, res, next) => {
     }));
 };
 exports.put = (req, res, next) => {
+    let user = new validator();
+
+    user.isRequired(req.body.Email, 'Campo Email é obrigatorio!');
+    user.isRequired(req.body.Nome, 'Campo Nome é obrigatorio!');
+    user.isRequired(req.body.idUsuario, 'Campo idUsuario é obrigatorio!');
+
+    if (!user.isValid()) {
+        res.status(400).send(user.errors()).end();
+        return;
+    }
     model.update(req.body).then(function (x) {
         res.status(201).send({
             message: 'Usuario alterado com suscesso',
@@ -74,6 +84,14 @@ exports.put = (req, res, next) => {
     }));
 };
 exports.delete = (req, res, next) => {
+    let user = new validator();
+    
+    user.isRequired(req.body.idUsuario, 'Campo idUsuario é obrigatorio!');
+
+    if (!user.isValid()) {
+        res.status(400).send(user.errors()).end();
+        return;
+    }
     model.delete(req.body.idUsuario).then(function (x) {
         res.status(201).send({
             message: 'Usuario deletado com suscesso',
